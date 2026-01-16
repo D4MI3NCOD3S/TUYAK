@@ -1,15 +1,15 @@
-# TUYAK - DUR ±â¼ú °ËÁõ ÇÁ·ÎÁ§Æ®
+# TUYAK - DUR ê¸°ìˆ  ê²€ì¦ í”„ë¡œì íŠ¸
 
-°³ÀÎÅõ¾àÀÌ·Â Á¶È¸ ½Ã½ºÅÛ (DUR) ±â¼ú °ËÁõ ¹× ºñ±³ ÇÁ·ÎÁ§Æ®
+ê°œì¸íˆ¬ì•½ì´ë ¥ ì¡°íšŒ ì‹œìŠ¤í…œ (DUR) ê¸°ìˆ  ê²€ì¦ ë° ë¹„êµ í”„ë¡œì íŠ¸
 
-## ÇÁ·ÎÁ§Æ® °³¿ä
+## í”„ë¡œì íŠ¸ ê°œìš”
 
-ÀÌ ÇÁ·ÎÁ§Æ®´Â °Ç°­º¸Çè½É»çÆò°¡¿ø(HIRA)ÀÇ DUR(Drug Utilization Review) ½Ã½ºÅÛ°ú Åë½ÅÇÏ´Â µÎ °¡Áö ¹æ½ÄÀ» ºñ±³ °ËÁõÇÕ´Ï´Ù:
+ì´ í”„ë¡œì íŠ¸ëŠ” ê±´ê°•ë³´í—˜ì‹¬ì‚¬í‰ê°€ì›(HIRA)ì˜ DUR(Drug Utilization Review) ì‹œìŠ¤í…œê³¼ í†µì‹ í•˜ëŠ” ë‘ ê°€ì§€ ë°©ì‹ì„ ë¹„êµ ê²€ì¦í•©ë‹ˆë‹¤:
 
-1. **COM ¹æ½Ä** - ±âÁ¸ ·¹°Å½Ã DLL/OCX È£Ãâ ¹æ½Ä
-2. **¼ÒÄÏ Åë½Å ¹æ½Ä** - Á÷Á¢ TCP/IP ¼ÒÄÏÀ¸·Î ºê·ÎÄ¿ ¼­¹ö¿Í Åë½Å
+1. **COM ë°©ì‹** - ê¸°ì¡´ ë ˆê±°ì‹œ DLL/OCX í˜¸ì¶œ ë°©ì‹
+2. **ì†Œì¼“ í†µì‹  ë°©ì‹** - ì§ì ‘ TCP/IP ì†Œì¼“ìœ¼ë¡œ ë¸Œë¡œì»¤ ì„œë²„ì™€ í†µì‹ 
 
-## ±â¼ú ½ºÅÃ
+## ê¸°ìˆ  ìŠ¤íƒ
 
 - .NET 8.0
 - ASP.NET Core MVC
@@ -17,82 +17,82 @@
 - Bootstrap 5
 - jQuery
 
-## ÁÖ¿ä ±â´É
+## ì£¼ìš” ê¸°ëŠ¥
 
-### 1. COM ¹æ½Ä Å×½ºÆ®
+### 1. COM ë°©ì‹ í…ŒìŠ¤íŠ¸
 - CheckMediHistory
 - CheckMediHistoryList
 - CheckMediDataList
 
-### 2. ¼ÒÄÏ Åë½Å - ÀÏ¹Ý Á¶È¸ (Code 6)
-- Broker ¸ðµå ('B'): ÆË¾÷ URL ¹ÝÈ¯
-- Server ¸ðµå ('S'): ÅØ½ºÆ® µ¥ÀÌÅÍ ¹ÝÈ¯ (DB ÀúÀå °¡´É)
+### 2. ì†Œì¼“ í†µì‹  - ì¼ë°˜ ì¡°íšŒ (Code 0, 6)
+- Code 0: ì¸ì¦ë²ˆí˜¸ ë°˜í™˜
+- Code 6: íˆ¬ì•½ì´ë ¥ pdf ë·°ì–´ URL ë°˜í™˜
 
-### 3. ¼ÒÄÏ Åë½Å - ÀÀ±Þ Á¶È¸ (Code 3)
-- ÀÎÁõ¹øÈ£ »ý·« °¡´É
-- Broker/Server ¸ðµå Áö¿ø
+### 3. ì†Œì¼“ í†µì‹  - ì‘ê¸‰ ì¡°íšŒ (Code 3)
+- ì¸ì¦ë²ˆí˜¸ ìƒëžµ ê°€ëŠ¥
+- Broker/Server ëª¨ë“œ ì§€ì›
 
-## ¼³Á¤ ¹æ¹ý
+## ì„¤ì • ë°©ë²•
 
-### 1. COM ÂüÁ¶ µî·Ï
+### 1. COM ì°¸ì¡° ë“±ë¡
 
-COM DLLÀ» °ü¸®ÀÚ ±ÇÇÑÀ¸·Î µî·Ï:
+COM DLLì„ ê´€ë¦¬ìž ê¶Œí•œìœ¼ë¡œ ë“±ë¡:
 
 ```cmd
 regsvr32 "C:\path\to\HiraDur.dll"
 ```
 
-### 2. ÇÁ·ÎÁ§Æ® ¼³Á¤
+### 2. í”„ë¡œì íŠ¸ ì„¤ì •
 
-- ÇÃ·§Æû ´ë»ó: **x86** (32ºñÆ®)
-- COM Hosting È°¼ºÈ­µÊ
+- í”Œëž«í¼ ëŒ€ìƒ: **x86** (32ë¹„íŠ¸)
+- COM Hosting í™œì„±í™”ë¨
 
-### 3. ½ÇÇà
+### 3. ì‹¤í–‰
 
 ```bash
 dotnet run
 ```
 
-## ÇÁ·ÎÁ§Æ® ±¸Á¶
+## í”„ë¡œì íŠ¸ êµ¬ì¡°
 
 ```
 WebApplication1/
-¦§¦¡¦¡ Controllers/
-¦¢   ¦¦¦¡¦¡ HomeController.cs          # ¸ÞÀÎ ÄÁÆ®·Ñ·¯
-¦§¦¡¦¡ Models/
-¦¢   ¦¦¦¡¦¡ HiraService.cs              # DUR Åë½Å ¼­ºñ½º
-¦§¦¡¦¡ Views/
-¦¢   ¦¦¦¡¦¡ Home/
-¦¢       ¦¦¦¡¦¡ Index.cshtml            # Å×½ºÆ® UI
-¦§¦¡¦¡ Program.cs                      # ¾Û ÁøÀÔÁ¡
-¦¦¦¡¦¡ WebApplication1.csproj          # ÇÁ·ÎÁ§Æ® ÆÄÀÏ
+â”œâ”€â”€ Controllers/
+â”‚   â””â”€â”€ HomeController.cs          # ë©”ì¸ ì»¨íŠ¸ë¡¤ëŸ¬
+â”œâ”€â”€ Models/
+â”‚   â””â”€â”€ HiraService.cs              # DUR í†µì‹  ì„œë¹„ìŠ¤
+â”œâ”€â”€ Views/
+â”‚   â””â”€â”€ Home/
+â”‚       â””â”€â”€ Index.cshtml            # í…ŒìŠ¤íŠ¸ UI
+â”œâ”€â”€ Program.cs                      # ì•± ì§„ìž…ì 
+â””â”€â”€ WebApplication1.csproj          # í”„ë¡œì íŠ¸ íŒŒì¼
 ```
 
-## ÁÖ¿ä Å¬·¡½º
+## ì£¼ìš” í´ëž˜ìŠ¤
 
 ### HiraService
 
-DUR ½Ã½ºÅÛ°ú Åë½ÅÇÏ´Â ÇÙ½É ¼­ºñ½º Å¬·¡½º
+DUR ì‹œìŠ¤í…œê³¼ í†µì‹ í•˜ëŠ” í•µì‹¬ ì„œë¹„ìŠ¤ í´ëž˜ìŠ¤
 
-- `RunComMethodLegacy()`: COM ¹æ½ÄÀ¸·Î DUR Á¶È¸
-- `RunSocketTestAsync()`: ¼ÒÄÏ ¹æ½ÄÀ¸·Î DUR Á¶È¸
-- `RequestAuthAsync()`: ÀÎÁõ¹øÈ£ ¿äÃ»
-- `ExtractAuthNumber()`: ÀÀ´ä¿¡¼­ ÀÎÁõ¹øÈ£ ÃßÃâ
+- `RunComMethodLegacy()`: COM ë°©ì‹ìœ¼ë¡œ DUR ì¡°íšŒ
+- `RunSocketTestAsync()`: ì†Œì¼“ ë°©ì‹ìœ¼ë¡œ DUR ì¡°íšŒ
+- `RequestAuthAsync()`: ì¸ì¦ë²ˆí˜¸ ìš”ì²­
+- `ExtractAuthNumber()`: ì‘ë‹µì—ì„œ ì¸ì¦ë²ˆí˜¸ ì¶”ì¶œ
 
 ### DurResponse
 
-DUR Á¶È¸ °á°ú¸¦ ´ã´Â ÀÀ´ä ¸ðµ¨
+DUR ì¡°íšŒ ê²°ê³¼ë¥¼ ë‹´ëŠ” ì‘ë‹µ ëª¨ë¸
 
-- `Success`: ¼º°ø ¿©ºÎ
-- `Message`: ÀÀ´ä ¸Þ½ÃÁö
-- `ResultType`: °á°ú Å¸ÀÔ (URL/DATA/ERROR)
-- `Content`: ÀÀ´ä ³»¿ë
-- `DataList`: µ¥ÀÌÅÍ ¸ñ·Ï
+- `Success`: ì„±ê³µ ì—¬ë¶€
+- `Message`: ì‘ë‹µ ë©”ì‹œì§€
+- `ResultType`: ê²°ê³¼ íƒ€ìž… (URL/DATA/ERROR)
+- `Content`: ì‘ë‹µ ë‚´ìš©
+- `DataList`: ë°ì´í„° ëª©ë¡
 
-## ¶óÀÌ¼±½º
+## ë¼ì´ì„ ìŠ¤
 
 MIT License
 
-## ÀÛ¼ºÀÚ
+## ìž‘ì„±ìž
 
-¿øº¹ ÀÌ (hwfrzy@gmail.com)
+ì›ë³µ ì´ (hwfrzy@gmail.com)

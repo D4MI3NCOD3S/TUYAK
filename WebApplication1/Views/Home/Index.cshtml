@@ -1,0 +1,169 @@
+﻿@{
+    ViewData["Title"] = "DUR 기술 검증 리포트";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h2 class="fw-bold">개인투약이력 DB화 기술 검증 리포트</h2>
+            <p class="text-muted">"COM 방식 vs 소켓 방식" 데이터 수신 형태 비교 검증</p>
+        </div>
+    </div>
+
+    <div class="card p-3 mb-4 shadow-sm">
+        <div class="row align-items-end">
+            <div class="col-md-3">
+                <label class="fw-bold">주민등록번호</label>
+                <input type="text" id="jumin" class="form-control" value="">
+            </div>
+            <div class="col-md-3">
+                <label class="fw-bold">인증번호 (일반조회용)</label>
+                <div class="input-group">
+                    <input type="text" id="authNo" class="form-control" placeholder="발송 후 입력">
+                    <button class="btn btn-outline-dark" onclick="reqAuth()">발송</button>
+                </div>
+            </div>
+            <div class="col-md-6 text-end">
+                <small class="text-muted">※ 10160044 / 123456 (테스트 정보)</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 border-secondary">
+                <div class="card-header bg-secondary text-white fw-bold">1. COM 방식 (Legacy)</div>
+                <div class="card-body">
+                    <p class="small text-muted mb-2">기존 DLL/OCX 호출 방식 검증</p>
+
+                    <div class="d-grid gap-2">
+                        <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
+                            <span>CheckMediHistory</span>
+                            <button class="btn btn-sm btn-secondary" onclick="runTest('COM_History')">실행</button>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center border-bottom pb-2">
+                            <span class="text-dark fw-bold">CheckMediHistoryList</span>
+                            <button class="btn btn-sm btn-warning" onclick="runTest('COM_List')">실행</button>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>CheckMediDataList</span>
+                            <button class="btn btn-sm btn-info" onclick="runTest('COM_DataList')">실행</button>
+                        </div>
+                    </div>
+                    <div class="alert alert-light mt-3 p-2 small" id="res_COM_AREA">대기 중...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 border-primary">
+                <div class="card-header bg-primary text-white fw-bold">2. 소켓 - 일반 조회 (Code 6)</div>
+                <div class="card-body">
+                    <p class="small text-muted mb-2">인증번호 필수 / 모듈별 응답 비교</p>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <strong>A. Broker 모드 ('B')</strong>
+                            <button class="btn btn-sm btn-outline-primary" onclick="runTest('NORMAL_B')">실행</button>
+                        </div>
+                        <small class="text-danger">예상: 팝업 URL (정책 강제)</small>
+                        <div class="alert alert-light mt-1 p-1 small" id="res_NORMAL_B">-</div>
+                    </div>
+
+                    <div>
+                        <div class="d-flex justify-content-between mb-1">
+                            <strong class="text-success">B. Server 모드 ('S')</strong>
+                            <button class="btn btn-sm btn-success" onclick="runTest('NORMAL_S')">실행</button>
+                        </div>
+                        <small class="text-success">예상: 텍스트 데이터 (DB화 가능)</small>
+                        <div class="alert alert-light mt-1 p-1 small" id="res_NORMAL_S">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 border-danger">
+                <div class="card-header bg-danger text-white fw-bold">3. 소켓 - 응급 조회 (Code 3)</div>
+                <div class="card-body">
+                    <p class="small text-muted mb-2">인증 생략 / 응급 예외 처리 검증</p>
+
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <strong>A. Broker 모드 ('B')</strong>
+                            <button class="btn btn-sm btn-outline-danger" onclick="runTest('EMERG_B')">실행</button>
+                        </div>
+                        <div class="alert alert-light mt-1 p-1 small" id="res_EMERG_B">-</div>
+                    </div>
+
+                    <div>
+                        <div class="d-flex justify-content-between mb-1">
+                            <strong>B. Server 모드 ('S')</strong>
+                            <button class="btn btn-sm btn-outline-danger" onclick="runTest('EMERG_S')">실행</button>
+                        </div>
+                        <div class="alert alert-light mt-1 p-1 small" id="res_EMERG_S">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function reqAuth() {
+            var jumin = $("#jumin").val();
+            $.post("/Home/RequestAuth", { jumin: jumin }, function(res) {
+                if(res.success) {
+                    alert("인증번호 발송됨: " + res.debugAuthNo);
+                    $("#authNo").val(res.debugAuthNo);
+                }
+            });
+        }
+
+        function runTest(type) {
+            var targetId = type.startsWith("COM") ? "#res_COM_AREA" : "#res_" + type;
+            $(targetId).removeClass("alert-success alert-warning alert-danger").addClass("alert-light").text("요청 중...");
+
+            var data = {
+                testType: type,
+                jumin: $("#jumin").val(),
+                authNo: $("#authNo").val()
+            };
+
+            $.post("/Home/RunTest", data, function(res) {
+                var badge = "";
+                var colorClass = "";
+                var displayMsg = "";
+
+                if (res.success) {
+                    if (res.resultType === "URL") {
+                        badge = "<span class='badge bg-warning text-dark me-1'>POPUP</span>";
+                        colorClass = "alert-warning";
+                        displayMsg = "팝업 URL 수신됨";
+                    } else if (res.resultType === "DATA") {
+                        badge = "<span class='badge bg-success me-1'>DATA</span>";
+                        colorClass = "alert-success";
+                        displayMsg = "데이터 수신 성공";
+                    } else {
+                        badge = "<span class='badge bg-secondary me-1'>INFO</span>";
+                        colorClass = "alert-secondary";
+                        displayMsg = res.message;
+                    }
+
+                    var contentPreview = res.content ? res.content.substring(0, 50) + "..." : "";
+
+                    $(targetId).removeClass("alert-light").addClass(colorClass)
+                        .html(badge + " <strong>" + displayMsg + "</strong><br><span style='font-size:0.8em'>" + contentPreview + "</span>");
+
+                    if(res.resultType === "URL") window.open(res.content);
+                } else {
+                    $(targetId).removeClass("alert-light").addClass("alert-danger")
+                        .html("실패 <strong></strong><br>" + res.message);
+                }
+            }).fail(function() {
+                $(targetId).text("서버 통신 오류");
+            });
+        }
+    </script>
+}

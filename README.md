@@ -89,10 +89,3 @@ DUR 조회 결과를 담는 응답 모델
 - `Content`: 응답 내용
 - `DataList`: 데이터 목록
 
-## 라이선스
-
-MIT License
-
-## 작성자
-
-원복 이 (hwfrzy@gmail.com)
